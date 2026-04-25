@@ -1,0 +1,77 @@
+<html>
+<head>
+    <style>
+        body { background: #222; overflow: hidden;  }
+        .game-button {
+            position: absolute;
+            padding: 10px 20px;
+           
+     font-weight: bold;
+            border-radius: 5px;
+            border: 2px solid #000;
+            transition: transform 0.1s;
+        }
+        .game-button:active { transform: scale(0.9); }
+    </style>
+</head>
+<body>
+    <div id="button-container">
+
+        <button class="game-button" style="top:50%; left:50%;" onclick="spawn(this)">CLICK ME</button>
+    </div>
+
+    <script>
+      let buttonCount = 1;
+
+function spawn(clickedButton) {
+    clickedButton.style.opacity = "0.3";
+    clickedButton.disabled = true;
+    clickedButton.innerText = "DONE";
+
+    for (let i = 0; i < 2; i++) {
+        buttonCount++;
+        const newBtn = document.createElement('button');
+        newBtn.className = 'game-button';
+        
+    
+        const roll = Math.random() * 100; 
+        let color = '#555';
+        let label = "CLICK ME";
+
+        if (roll <= 0.5) {
+color = '#ff00ff';
+            label = "RARE pink";
+            newBtn.style.boxShadow = "0 0 20px #ff00ff"; 
+        } else if (roll <= 1.5) { 
+        
+            color = '#ffd700';
+            label = "RARE gold";
+            newBtn.style.border = "3px solid #fff";
+        } else if (roll <= 6.5) {
+            
+            color = '#c0c0c0';
+            label = "RARE silver";
+        } else {
+            const commonColors = ['#ff4757', '#2ed573', '#1e90ff', '#ffa502'];
+            color = commonColors[Math.floor(Math.random() * commonColors.length)];
+        }
+
+        newBtn.style.backgroundColor = color;
+        newBtn.innerText = label;
+        
+
+        const x = Math.random() * (window.innerWidth - 150);
+        const y = Math.random() * (window.innerHeight - 50);
+        newBtn.style.left = x + 'px';
+        newBtn.style.top = y + 'px';
+        newBtn.style.zIndex = buttonCount;
+
+        newBtn.onclick = function() { spawn(this); };
+        document.getElementById('button-container').appendChild(newBtn);
+    }
+}
+
+
+    </script>
+</body>
+</html>

@@ -1,1 +1,1 @@
-# bu
+This is for Horizons Orion Jam. I am a beginner, so I'm sorry if this isn't great, or isn't as gamified as you'd like. I tried!
